@@ -99,11 +99,13 @@ def tranform_pdf_to_txt(act_info: ActInfo) -> None:
 def update_sejm_acts_data():
     """Run the ETL pipeline for acts."""
     logging.info("Started running the ETL pipeline for acts")
-    NUMBER_OF_YEARS_TO_PROCESS = 3
+    settings.number_of_years_to_process = 3
     publishers = ["DU", "MP"]
 
     current_year = datetime.now().year
-    for year in range(current_year, current_year - NUMBER_OF_YEARS_TO_PROCESS, -1):
+    for year in range(
+        current_year, current_year - settings.number_of_years_to_process, -1
+    ):
         for publisher in publishers:
             logging.info(f"Processing year: {year} for publishers: {publisher}")
             acts_list = get_acts_list(publisher, year)

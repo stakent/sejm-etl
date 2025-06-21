@@ -14,9 +14,11 @@ class EnvType(StrEnum):
 class Settings(BaseSettings):
     app_name: str = "sejm-etl"
     env: EnvType = EnvType.DEV
-    cache_base_dir: str = f"/tmp/{app_name}/{str(env)}"
     log_level: int = logging.INFO
     requests_external_timeout: int = 10
+
+    number_of_years_to_process: int = 3
+    cache_base_dir: str = f"/tmp/{app_name}/{str(env)}"
 
 
 settings = Settings()
