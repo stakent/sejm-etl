@@ -96,6 +96,14 @@ def tranform_pdf_to_txt(act_info: ActInfo) -> None:
         pdf_file.write(text)
 
 
+def update_sejm_act_data(act_info: ActInfo) -> None:
+    if not is_act_cached(act_info=act_info, format=ActFormatType.PDF):
+        get_and_cache_act_pdf(act_info=act_info)
+
+    if not is_act_cached(act_info=act_info, format=ActFormatType.TXT):
+        tranform_pdf_to_txt(act_info=act_info)
+
+
 def update_sejm_acts_data():
     """Run the ETL pipeline for acts."""
     logging.info("Started running the ETL pipeline for acts")
@@ -118,10 +126,6 @@ def update_sejm_acts_data():
                 if n % 100 == 0:
                     logging.info(f"Processed {n} acts out of {len(acts_list)}")
 
-                if not is_act_cached(act_info=act_info, format=ActFormatType.PDF):
-                    get_and_cache_act_pdf(act_info=act_info)
-
-                if not is_act_cached(act_info=act_info, format=ActFormatType.TXT):
-                    tranform_pdf_to_txt(act_info=act_info)
+                update_sejm_act_data(act_info=act_info)
 
     logging.info("Finished ETL pipeline for acts")
