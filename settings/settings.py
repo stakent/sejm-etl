@@ -18,7 +18,11 @@ class Settings(BaseSettings):
     requests_external_timeout: int = 10
 
     number_of_years_to_process: int = 3
-    cache_base_dir: str = f"/tmp/{app_name}/{str(env)}"
+    cache_base_dir_prefix: str = "/tmp"
+
+    @property
+    def cache_base_dir(self) -> str:
+        return f"{self.cache_base_dir_prefix}/{self.app_name}/{str(self.env)}"
 
 
 settings = Settings()
