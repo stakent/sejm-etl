@@ -9,10 +9,11 @@ def replace_spaces_new_lines(text: str) -> str:
 
 def test_pdf_to_text():
     file_name = "tests/transform/data/WDU20250000027.pdf"
-    #  tests/transform/data/WDU20250000027.pdf
 
     with open(file_name, "rb") as f:
-        text = act_pdf_to_text(pdf_file=f, act_position=27)
+        text = act_pdf_to_text(
+            pdf_file=f, act_position=27, log_prefix="test-log-prefix"
+        )
     assert " \n \n \n" not in text
     assert "Minister Sprawiedliwości" in text  # check if we process all pages
     # check if words splitting was reversed

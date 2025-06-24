@@ -21,7 +21,7 @@ def text_as_hex(text: str) -> str:
     return buf
 
 
-def act_pdf_to_text(pdf_file: FileIO, act_position: int) -> str:
+def act_pdf_to_text(pdf_file: FileIO, act_position: int, log_prefix: str) -> str:
     """Transform Sejm act PDF to text."""
     page_header_marks = [
         f"Poz. {act_position}",
@@ -39,7 +39,9 @@ def act_pdf_to_text(pdf_file: FileIO, act_position: int) -> str:
     for page in reader.pages:
         page_number += 1
         if number_of_pages > 10 and page_number % 10 == 0:
-            logging.info(f"Processing page {page_number}/{number_of_pages}")
+            logging.info(
+                f"{log_prefix} - processing page {page_number}/{number_of_pages}"
+            )
 
         page_text = page.extract_text()
 
@@ -52,9 +54,6 @@ def act_pdf_to_text(pdf_file: FileIO, act_position: int) -> str:
                 raise PageHeaderNotFound(
                     f"Page {page_number}, '{page_header_mark}' context '{text[-100:]}'=============='{page_text[0:100]}' {text_as_hex(page_text[0:100])}"
                 )
-            # raise ValueError(
-            # f"{page_text[:page_header_pos]}==={page_text[page_header_pos:100]}"
-            # )
             page_text = page_text[page_header_pos + len(page_header_mark) :]
         text += page_text.strip() + "\n"
 
