@@ -29,17 +29,25 @@ This pipeline is a data integration process that involves three main steps:
 - clone this repository
 
 - activate recent Python version
-`pyenv shell 3.12.11`
+```shell
+pyenv shell 3.12.11
+```
 
 - create and activate virtual environment
-`python -m venv venv`
+```shell
+python -m venv venv
+```
 
 - install dependencies
-`pip install -r requirements/dev.txt`
+```shell
+pip install -r requirements/dev.txt
+```
 
 # Running
 Use provided shell script
-`./run-sejm-etl.sh`
+```shell
+./run-sejm-etl.sh
+```
 
 See in the shell script how to override default settings values.
 
