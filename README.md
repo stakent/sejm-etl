@@ -1,3 +1,11 @@
+Table of contents
+- [Description](#description)
+- [ETL for acts](#etl-for-acts)
+- [Installation](#installation)
+- [Running](#running)
+- [Settings](#settings)
+
+
 # Description
 
 This project contains an ETL pipeline for processing data exposed by the Sejm (Polish parliament) API.
@@ -26,7 +34,11 @@ This pipeline is a data integration process that involves three main steps:
 
 # Installation
 
-- clone this repository
+- clone this repository and change working directory
+```shell
+https://github.com/stakent/sejm-etl.git
+cd sejm-etl
+```
 
 - activate recent Python version
 ```shell
@@ -53,7 +65,7 @@ See in the shell script how to override default settings values.
 
 
 # Settings
-|            Name            | Type | Default value |              Description               |
+| Name                       | Type | Default value | Description                            |
 | -------------------------- | ---- | ------------- | -------------------------------------- |
 | app_name                   | str  | "sejm-etl"    | Application name                       |
 | env                        | str  | "dev"         | Environment type                       |
